@@ -1,0 +1,42 @@
+@host=http://localhost
+
+@port=3000
+
+@server={{host}}:{{port}}
+
+###get all books
+GET {{server}}/api/books
+
+####get book by id
+GET {{server}}/api/books/1
+
+###add new book
+POST {{server}}/api/books
+Content-Type: application/json
+
+{
+  "title": "New Book",
+  "author": "John Doe",
+  "category": "Fiction",
+  "publish_year": 2021,
+  "available": 1
+  
+}
+
+###modify book by id
+
+PUT {{server}}/api/books/1
+Content-Type: application/json
+
+{
+  "title": "Updated Book",
+  "author": "Jane Doe",
+  "category": "Non-Fiction",
+  "publish_year": 2022,
+  "available": 0
+}
+
+####delete book by id
+DELETE {{server}}/api/books/1
+
+

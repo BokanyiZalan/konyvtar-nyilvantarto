@@ -1,0 +1,35 @@
+@host=http://localhost
+
+@port=3000
+
+@server={{host}}:{{port}}
+
+###get all readers
+GET {{server}}/api/readers
+
+####get reader by id
+GET {{server}}/api/readers/1
+
+###add new reader
+POST {{server}}/api/readers
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "phone": "123-456-7890",
+    "registered_at": "2023-01-01"
+}
+
+###modify reader by id
+PUT {{server}}/api/readers/1
+Content-Type: application/json
+
+{
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com",
+    "phone": "098-765-4321"
+}
+
+####delete reader by id
+DELETE {{server}}/api/readers/1
