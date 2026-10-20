@@ -43,4 +43,48 @@ router.post('/',(req,res)=>{
     });
 });
 
+router.put('/:id',(req,res)=>{
+    const id = req.params.id;
+    const {book_id,reader_id,loan_date,due_date,return_date} = req.body;
+    if(!book_id || !reader_id || !loan_date || !due_date){
+        return res.status(400).send('All fields are required');
+    }
+    db.query('UPDATE loans SET book_id = ?, reader_id = ?, loan_date = ?, due_date = ?, return_date = ? WHERE id = ?',[book_id,reader_id,loan_date,due_date,return_date,id],(err,result)=>{
+        if(err){
+            console.error(err);
+            return res.status(500).send('Error occurred while updating loan');
+        }else{
+            return res.status(201).json({message:'Loan updated successfully'});
+        }
+    });
+});
+
+router.delete('/:id',(req,res)=>{
+    const id = req.params.id;
+    db.query('DELETE FROM loans WHERE id = ?',[id],(err,result)=>{
+        if(err){
+            console.error(err);
+            return res.status(500).send('Error occurred while deleting loan');
+        }else{
+            return res.status(201).json({message:'Loan deleted successfully'});
+        }
+    });
+});
+//visszahozás dátumának rögzítése
+router.patch('/:id/return',(req,res)=>{
+    const id = req.params.id;
+    const {return_date} = req.body;
+    if(!return_date){
+        return res.status(400).send('Return date is required');
+    }
+    db.query('UPDATE loans SET return_date = ? WHERE id = ?',[return_date,id],(err,result)=>{
+        if(err){
+            console.error(err);
+            return res.status(500).send('Error occurred while updating loan return date');
+        }else{
+            return res.status(201).json({message:'Loan return date updated successfully'});
+        }
+    });
+});
+
 module.exports=router

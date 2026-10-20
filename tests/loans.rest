@@ -24,3 +24,27 @@ Content-Type: application/json
   "due_date": "2023-01-15"
 }
 
+###modify loan by id
+PUT {{server}}/api/loans/3
+Content-Type: application/json
+
+{
+    "book_id": 2,
+  "reader_id": 1,
+ 
+  "loan_date": "2023-01-01",
+  "due_date": "2023-01-15",
+  "return_date": "2023-01-20"
+ 
+}
+
+###delete loan by id
+DELETE {{server}}/api/loans/3
+
+###return loan edit
+PATCH {{server}}/api/loans/4/return
+Content-Type: application/json
+
+{
+  "return_date": "2023-01-20"
+}
