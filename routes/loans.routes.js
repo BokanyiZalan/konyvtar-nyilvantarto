@@ -2,8 +2,10 @@ const express = require('express')
 const router=express.Router()
 var db=require('../config/database')
 
+//get loans with book names and reader names
+
 router.get('/',(req,res)=>{
-    db.query('SELECT * FROM loans',(err,result)=>{
+    db.query('SELECT loans.*, books.title AS book_title, readers.name AS reader_name FROM loans INNER JOIN books ON loans.book_id = books.id INNER JOIN readers ON loans.reader_id = readers.id',(err,result)=>{
         if(err){
             console.error(err);
             return res.status(500).send('Error occurred while fetching loans');
