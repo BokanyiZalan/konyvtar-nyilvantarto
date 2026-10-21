@@ -7,9 +7,9 @@ router.get('/',(req,res)=>{
     db.query('SELECT * FROM books',(err,result)=>{
         if(err){
             console.error(err);
-            res.status(500).send('Error occurred while fetching books');
+            return res.status(500).send('Error occurred while fetching books');
         }else{
-            res.json(result);
+            return res.status(201).json(result);
         }
     });
 });
@@ -29,7 +29,7 @@ router.get('/:id',(req,res)=>{
             console.error(err);
            return res.status(500).send('Error occurred while fetching book');
         }else{
-            return res.status(201).json({result: result[0]});
+            return res.status(201).json(result[0]);
         }
         
     });

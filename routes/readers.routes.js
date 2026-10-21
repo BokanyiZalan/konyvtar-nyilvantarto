@@ -8,7 +8,7 @@ router.get('/',(req,res)=>{
             console.error(err);
             return res.status(500).send('Error occurred while fetching readers');
         }else{
-            return res.status(201).json({readers: result});
+            return res.status(201).json(result);
         }
     });
 });
@@ -24,7 +24,7 @@ router.get('/:id',(req,res)=>{
             if(!result.length){
                 return res.status(404).send('Reader not found');
             }
-            return res.status(201).json({reader: result[0]});
+            return res.status(201).json(result[0]);
         }
     });
 });
